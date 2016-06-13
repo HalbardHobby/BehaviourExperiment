@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Lottery
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You are presented with the following lotteries:
+        {{round_number}}
+    </p>
+    <p>
+        {{subsession.round_number}}
+        {{subsession.current_set}}
+        {{subsession.current_lottery}}
+    </p>
+
+    {% formfield player.lottery %}
+
+    {% next_button %}
+
+{% endblock %}

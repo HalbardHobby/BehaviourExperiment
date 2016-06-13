@@ -7,21 +7,24 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-
-class MyPage(Page):
-    pass
-
 class ResultsWaitPage(WaitPage):
 
     def after_all_players_arrive(self):
         pass
 
-class Results(Page):
-    pass
+class Lottery(Page):
+    form_model = models.Player
+    form_fields = ['lottery']
 
+class Mood(Page):
+    form_model = models.Player
+    form_fields = [ 'interested', 'distressed', 'excited', 'upset', 
+                    'strong', 'guilty', 'scared', 'hostile',
+                    'enthusiastic', 'proud', 'irritable', 'alert',
+                    'ashamed', 'inspired', 'nervous', 'determined',
+                    'attentive', 'jittery', 'active', 'afraid']
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
-    Results
+    Lottery,
+    Mood
 ]
