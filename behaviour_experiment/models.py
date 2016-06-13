@@ -12,8 +12,6 @@ from otree.constants import BaseConstants
 from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
-from django_countries.fields import CountryField
-
 author = 'Alejandro Espinosa'
 
 doc = """
@@ -24,8 +22,53 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'behaviour_experiment'
     players_per_group = None
-    num_rounds = 4
-
+    num_rounds = 40
+    
+    lotteries = [[{'id': 1, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 2, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 3, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 4, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 5, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 6, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 7, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 8, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 9, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 10, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)}],
+                
+                [{'id': 1, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 2, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 3, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 4, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 5, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 6, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 7, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 8, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 9, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 10, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)}],
+                
+                [{'id': 1, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 2, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 3, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 4, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 5, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 6, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 7, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 8, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 9, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 10, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)}],
+                
+                [{'id': 1, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 2, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 3, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 4, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 5, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 6, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 7, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 8, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 9, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
+                {'id': 10, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)}]]
+                
+    current_set = lotteries[0]
 
 class Subsession(BaseSubsession):
     pass
@@ -41,62 +84,94 @@ class Player(BasePlayer):
         """Calculate payoff, which is zero for the survey"""
         self.payoff = 0
                                 
-    lottery_0 = models.CharField(choices=['Lottery A', 'Lottery B'],
+    lottery = models.CharField(choices=['Lottery A', 'Lottery B'],
                                 doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+                                widget=widgets.RadioSelectHorizontal())
+    
+    lottery_id = models.PositiveIntegerField()
                                 
-    time_0 = models.DateTimeField()
-                                
-    lottery_1 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    time_init = models.DateTimeField()
     
-    time_1 = models.DateTimeField()
-                                
-    lottery_2 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
-
-    time_2 = models.DateTimeField()
-
-    lottery_3 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    """preguntas de control"""
     
-    time_3 = models.DateTimeField()
-                                
-    lottery_4 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
     
-    time_4 = models.DateTimeField()
+    interested = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    lottery_5 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    distressed = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    time_5 = models.DateTimeField()
+    excited = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    lottery_6 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    upset = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    time_6 = models.DateTimeField()
-                                
-    lottery_7 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    strong = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    time_7 = models.DateTimeField()
+    guilty = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    lottery_8 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
+    scared = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    time_8 = models.DateTimeField()
+    hostile = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
     
-    lottery_9 = models.CharField(choices=['Lottery A', 'Lottery B'],
-                                doc="""Lottery A or B""",
-                                widget=widgets.RadioSelect())
-
-    time_9 = models.DateTimeField()
+    enthusiastic = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    proud = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    irritable = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    alert = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    ashamed = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    inspired = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+                                             
+    nervous = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+                                             
+    determined = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+                                             
+    attentive = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+                                             
+    jittery = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+                                             
+    active = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
+    afraid = models.PositiveIntegerField(choices=[1,2,3,4,5],
+                                             doc="""preguntas de control""",
+                                             widget=widgets.RadioSelectHorizontal())
+    
