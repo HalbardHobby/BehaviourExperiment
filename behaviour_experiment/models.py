@@ -85,17 +85,37 @@ class Subsession(BaseSubsession):
                                 
     lottery_b_prob = models.IntegerField()
     
+    def set_payment(self):
+        player_history = self.get_groups()[0].get_players()[0].in_previous_rounds()
+        lottery_history = self.in_previous_rounds()
+        
+        selected_round = random.randint(1, 39)
+        if player_history[selected_round].lottery == 'Lottery A':
+            lottery_1 = lottery_history[selected_round].lottery_a1
+            lottery_2 = lottery_history[selected_round].lottery_a1
+            lottery_p = lottery_history[selected_round].lottery_a_prob
+        elif player_history[selected_round].lottery == 'Lottery B':
+            lottery_1 = lottery_history[selected_round].lottery_b1
+            lottery_2 = lottery_history[selected_round].lottery_b1
+            lottery_p = lottery_history[selected_round].lottery_b_prob
+            
+        result = random.randint(1,10)
+        player = self.get_groups()[0].get_players()[0]
+        player.current_money = 10
+        player.current_money += lottery_1 if result <= lottery_p else lottery_2
+    
     def before_session_starts(self):
         current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
         current_lottery = current_set[self.round_number % 10]
         
         player = self.get_groups()[0].get_players()[0]
-        player.lottery_id = current_lottery['id']
         
         if self.round_number == 1:
             player.current_money = random.choice([5,10,15])
         elif self.round_number == 11:
             player.current_money = 10
+        elif self.round_number == 40:
+            self.set_payment()
         else:
             player.current_money = player.in_round(self.round_number -1).current_money
         
@@ -122,8 +142,6 @@ class Player(BasePlayer):
                                 doc="""Lottery A or B""",
                                 verbose_name='Choose which lottery you prefer',
                                 widget=widgets.RadioSelectHorizontal())
-    
-    lottery_id = models.PositiveIntegerField()
     
     current_money = models.IntegerField(verbose_name='Current Earnings')
     
