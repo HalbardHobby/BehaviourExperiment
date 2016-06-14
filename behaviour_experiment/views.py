@@ -7,14 +7,23 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
-class ResultsWaitPage(WaitPage):
-
-    def after_all_players_arrive(self):
-        pass
-
 class Lottery(Page):
     form_model = models.Player
     form_fields = ['lottery']
+    
+    def is_displayed(self):
+        return self.subsession.round_number != Constants.num_rounds
+
+class ResultsWaitPage(WaitPage):
+    
+    def is_displayed(self):
+        return self.subsession.round_number == Constants.num_rounds -1
+
+    def after_all_players_arrive(self):
+        self.subsession.set_payment()
+
+    body_text = "Calculating income"
+
 
 class Mood(Page):
     form_model = models.Player
@@ -23,8 +32,13 @@ class Mood(Page):
                     'enthusiastic', 'proud', 'irritable', 'alert',
                     'ashamed', 'inspired', 'nervous', 'determined',
                     'attentive', 'jittery', 'active', 'afraid']
+                    
+    def is_displayed(self):
+        return self.subsession.round_number == 1 or self.subsession.round_number == 11 or self.subsession.round_number == Constants.num_rounds
+
 
 page_sequence = [
-    Lottery
-    #Mood
+    Mood,
+    Lottery,
+    ResultsWaitPage
 ]

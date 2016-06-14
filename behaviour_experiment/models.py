@@ -23,7 +23,7 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'behaviour_experiment'
     players_per_group = None
-    num_rounds = 40
+    num_rounds = 31
     
     lotteries = [[{'id': 1, 'Lottery A':(1, 4.75, 3.66), 'Lottery B':(1, 8.8, 0.23)},
                 {'id': 2, 'Lottery A':(2, 5.80, 4.00), 'Lottery B':(2, 9.63, 0.25)},
@@ -75,21 +75,21 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     
-    lottery_a1 = models.FloatField()
-    lottery_a2 = models.FloatField()
+    lottery_a1 = models.CurrencyField()
+    lottery_a2 = models.CurrencyField()
     
     lottery_a_prob = models.IntegerField()
     
-    lottery_b1 = models.FloatField()
-    lottery_b2 = models.FloatField()
+    lottery_b1 = models.CurrencyField()
+    lottery_b2 = models.CurrencyField()
                                 
     lottery_b_prob = models.IntegerField()
     
     def set_payment(self):
-        player_history = self.get_groups()[0].get_players()[0].in_previous_rounds()
-        lottery_history = self.in_previous_rounds()
+        player_history = self.get_groups()[0].get_players()[0].in_all_rounds()
+        lottery_history = self.in_all_rounds()
         
-        selected_round = random.randint(1, 39)
+        selected_round = random.randint(1, Constants.num_rounds)
         if player_history[selected_round].lottery == 'Lottery A':
             lottery_1 = lottery_history[selected_round].lottery_a1
             lottery_2 = lottery_history[selected_round].lottery_a1
@@ -101,8 +101,8 @@ class Subsession(BaseSubsession):
             
         result = random.randint(1,10)
         player = self.get_groups()[0].get_players()[0]
-        player.current_money = 10
-        player.current_money += lottery_1 if result <= lottery_p else lottery_2
+        player.payoff = c(10)
+        player.payoff += c(lottery_1) if result <= lottery_p else c(lottery_2)
     
     def before_session_starts(self):
         current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
@@ -111,21 +111,21 @@ class Subsession(BaseSubsession):
         player = self.get_groups()[0].get_players()[0]
         
         if self.round_number == 1:
-            player.current_money = random.choice([5,10,15])
+            player.payoff = random.choice([c(5),c(10),c(15)])
         elif self.round_number == 11:
-            player.current_money = 10
-        elif self.round_number == 40:
-            self.set_payment()
+            player.payoff = c(10)
+        elif self.round_number == Constants.num_rounds:
+            player.payoff = None
         else:
-            player.current_money = player.in_round(self.round_number -1).current_money
+            player.payoff = player.in_round(self.round_number -1).payoff
         
         self.lottery_a_prob = current_lottery['Lottery A'][0]
-        self.lottery_a1 = current_lottery['Lottery A'][1]
-        self.lottery_a2 = current_lottery['Lottery A'][2]
+        self.lottery_a1 = c(current_lottery['Lottery A'][1])
+        self.lottery_a2 = c(current_lottery['Lottery A'][2])
         
         self.lottery_b_prob = current_lottery['Lottery B'][0]
-        self.lottery_b1 = current_lottery['Lottery B'][1]
-        self.lottery_b2 = current_lottery['Lottery B'][2]
+        self.lottery_b1 = c(current_lottery['Lottery B'][1])
+        self.lottery_b2 = c(current_lottery['Lottery B'][2])
 
 
 class Group(BaseGroup):
@@ -142,8 +142,6 @@ class Player(BasePlayer):
                                 doc="""Lottery A or B""",
                                 verbose_name='Choose which lottery you prefer',
                                 widget=widgets.RadioSelectHorizontal())
-    
-    current_money = models.IntegerField(verbose_name='Current Earnings')
     
     """preguntas de control"""
     
