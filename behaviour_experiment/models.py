@@ -69,17 +69,35 @@ class Constants(BaseConstants):
                 {'id': 9, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)},
                 {'id': 10, 'Lottery A':(1/10, 4.75, 3.66), 'Lottery B':(1/10, 8.8, 0.23)}]]
                 
+    for lot in lotteries:
+        random.shuffle(lot)
+                
 
 class Subsession(BaseSubsession):
     
-    current_set = Constants.lotteries[0]
-    current_lottery = current_set[0]
+    lottery_a1 = models.FloatField()
+    lottery_a2 = models.FloatField()
+    
+    lottery_a_prob = models.FloatField()
+    
+    lottery_b1 = models.FloatField()
+    lottery_b2 = models.FloatField()
+                                
+    lottery_a_prob = models.FloatField()
     
     def before_session_starts(self):
-        if self.round_number % 10 == 0:
-            self.current_set = Constants.lotteries[(self.round_number//10)-1]
+        current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
+        current_lottery = current_set[self.round_number % 10]
         
-        self.current_lottery = self.current_set[self.round_number % 10]
+        self.get_groups()[0].get_players()[0].lottery_id = current_lottery['id']
+        
+        self.lottery_a_prob = current_lottery['Lottery A'][0]
+        self.lottery_a1 = current_lottery['Lottery A'][1]
+        self.lottery_a2 = current_lottery['Lottery A'][2]
+        
+        self.lottery_b_prob = current_lottery['Lottery B'][0]
+        self.lottery_b1 = current_lottery['Lottery B'][1]
+        self.lottery_b2 = current_lottery['Lottery B'][2]
 
 
 class Group(BaseGroup):
@@ -98,8 +116,6 @@ class Player(BasePlayer):
                                 widget=widgets.RadioSelectHorizontal())
     
     lottery_id = models.PositiveIntegerField()
-                                
-    time_init = models.DateTimeField()
     
     """preguntas de control"""
     

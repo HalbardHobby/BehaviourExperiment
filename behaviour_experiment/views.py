@@ -25,6 +25,6 @@ class Mood(Page):
                     'attentive', 'jittery', 'active', 'afraid']
 
 page_sequence = [
-    Lottery,
-    Mood
+    Lottery
+    #Mood
 ]
