@@ -13,6 +13,11 @@ class Questionnaire(Page):
     form_fields = ['age', 'occupation',
                     'gender', 'daily_internet',
                     'monthly_income', 'email', 'results']
+                    
+class Emotions(Page):
+    form_model = models.Player
+    form_fields = ['positive', 'emotions', 'negative', 'express', 'stress',
+                    'control', 'positive_situation', 'negative_situation', 'negative_express', 'negative_situation']
 
 class Thanks(Page):
     pass
@@ -24,6 +29,7 @@ class ResultsWaitPage(WaitPage):
 
 
 page_sequence = [
+    Emotions,
     Questionnaire,
     Thanks
 ]

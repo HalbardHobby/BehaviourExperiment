@@ -1,0 +1,22 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Your income has changed
+{% endblock %}
+
+{% block content %}
+
+    <h3>
+        {% if player.payoff == 5 %}
+            Your income has increased! 
+        {% elif player.payoff == 15 %}
+            Your income has decreased! 
+        {% else %}
+            Your income is 10! 
+        {%endif%}
+        You’re guaranteed to have a minimal earning of 10 Euros at the end of the experiment.
+    </h3>
+    {% next_button %}
+
+{% endblock %}

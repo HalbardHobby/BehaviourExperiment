@@ -45,8 +45,7 @@ class Player(BasePlayer):
     
     daily_internet = models.PositiveIntegerField(verbose_name='Average daily hours of internet use')
     
-    monthly_income = models.CurrencyField(choices=[c(x*500) for x in range(1,10)],
-                                            verbose_name='Monthly income',
+    monthly_income = models.CurrencyField(verbose_name='Monthly income',
                                             widget=widgets.RealWorldCurrencyInput())
                                             
     email = models.EmailField(verbose_name='Email')
@@ -54,3 +53,47 @@ class Player(BasePlayer):
     results = models.CharField(choices=['Yes', 'No'],
                                 verbose_name='Would you like to recieve further information?',
                                 widget=widgets.RadioSelectHorizontal())
+                                
+    """Metrics"""
+    
+    positive = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I want to feel a positive emotion, I change what I\'m thinking about.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    emotions = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='I keep emotions to myself.',
+                                            widget=widgets.RadioSelectHorizontal())
+    
+    negative = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I want to feel a less negative emotion, I change what I\'m thinking about.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    express = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I\'m feeling a positive emotion, I\'m careful not to express them.',
+                                            widget=widgets.RadioSelectHorizontal())
+    
+    stress = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I\'m faced with an stressful situation, I think about it in a way that makes me feel calm.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    control = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='I control my emotions by not expressing them.',
+                                            widget=widgets.RadioSelectHorizontal())
+    
+    positive_situation = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I want to feel a positive emotion, I change the way I\'m thinking about the situation.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    control_situation = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='I control my emotions by thinking about the situation I\m in.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    negative_express = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I\'m feeling a negative emotion, I\'m careful not to express them.',
+                                            widget=widgets.RadioSelectHorizontal())
+                                            
+    negative_situation = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7],
+                                            verbose_name='When I want to feel a less negative emotion, I change the way I\'m thinking about the situation.',
+                                            widget=widgets.RadioSelectHorizontal())
+    
+    

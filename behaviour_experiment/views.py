@@ -18,6 +18,10 @@ class Lottery(Page):
     def is_displayed(self):
         return self.subsession.round_number != Constants.num_rounds
 
+class Income(Page):
+    def is_displayed(self):
+        return self.subsession.round_number == 10 
+
 class ResultsWaitPage(WaitPage):
     
     def is_displayed(self):
@@ -32,10 +36,8 @@ class ResultsWaitPage(WaitPage):
 class Mood(Page):
     form_model = models.Player
     form_fields = [ 'interested', 'distressed', 'excited', 'upset', 
-                    'strong', 'guilty', 'scared', 'hostile',
-                    'enthusiastic', 'proud', 'irritable', 'alert',
-                    'ashamed', 'inspired', 'nervous', 'determined',
-                    'attentive', 'jittery', 'active', 'afraid']
+                    'scared', 'hostile','enthusiastic', 'irritable', 
+                    'alert', 'inspired', 'nervous', 'attentive']
                     
     def is_displayed(self):
         return self.subsession.round_number == 1 or self.subsession.round_number == 11 or self.subsession.round_number == Constants.num_rounds
@@ -45,5 +47,6 @@ page_sequence = [
     Instructions,
     Mood,
     Lottery,
-    ResultsWaitPage
+    ResultsWaitPage,
+    Income
 ]

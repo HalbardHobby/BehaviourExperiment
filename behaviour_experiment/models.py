@@ -166,16 +166,6 @@ class Player(BasePlayer):
                                              verbose_name='Upset',
                                              widget=widgets.RadioSelectHorizontal())
     
-    strong = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Strong',
-                                             widget=widgets.RadioSelectHorizontal())
-    
-    guilty = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Guilty',
-                                             widget=widgets.RadioSelectHorizontal())
-    
     scared = models.PositiveIntegerField(choices=[1,2,3,4,5],
                                              doc="""preguntas de control""",
                                              verbose_name='Scared',
@@ -191,11 +181,6 @@ class Player(BasePlayer):
                                              verbose_name='Enthusiastic',
                                              widget=widgets.RadioSelectHorizontal())
     
-    proud = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Proud',
-                                             widget=widgets.RadioSelectHorizontal())
-    
     irritable = models.PositiveIntegerField(choices=[1,2,3,4,5],
                                              doc="""preguntas de control""",
                                              verbose_name='Irritable',
@@ -204,11 +189,6 @@ class Player(BasePlayer):
     alert = models.PositiveIntegerField(choices=[1,2,3,4,5],
                                              doc="""preguntas de control""",
                                              verbose_name='Alert',
-                                             widget=widgets.RadioSelectHorizontal())
-    
-    ashamed = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Ashamed',
                                              widget=widgets.RadioSelectHorizontal())
     
     inspired = models.PositiveIntegerField(choices=[1,2,3,4,5],
@@ -221,28 +201,8 @@ class Player(BasePlayer):
                                              verbose_name='Nervous',
                                              widget=widgets.RadioSelectHorizontal())
                                              
-    determined = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Determined',
-                                             widget=widgets.RadioSelectHorizontal())
-                                             
     attentive = models.PositiveIntegerField(choices=[1,2,3,4,5],
                                              doc="""preguntas de control""",
                                              verbose_name='Attentive',
                                              widget=widgets.RadioSelectHorizontal())
                                              
-    jittery = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Jittery',
-                                             widget=widgets.RadioSelectHorizontal())
-                                             
-    active = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Active',
-                                             widget=widgets.RadioSelectHorizontal())
-    
-    afraid = models.PositiveIntegerField(choices=[1,2,3,4,5],
-                                             doc="""preguntas de control""",
-                                             verbose_name='Afraid',
-                                             widget=widgets.RadioSelectHorizontal())
-    
