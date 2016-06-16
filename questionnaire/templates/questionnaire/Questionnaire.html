@@ -1,0 +1,24 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Final Survey
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Please give us some infromation.
+    </p>
+
+    {% formfield player.age %}
+    {% formfield player.occupation %}
+    {% formfield player.gender %}
+    {% formfield player.daily_internet %}
+    {% formfield player.monthly_income %}
+    {% formfield player.email %}
+    {% formfield player.results %}
+
+    {% next_button %}
+
+{% endblock %}

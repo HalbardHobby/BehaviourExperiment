@@ -7,6 +7,10 @@ from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 
+class Instructions(Page):
+    def is_displayed(self):
+        return self.subsession.round_number == 1
+
 class Lottery(Page):
     form_model = models.Player
     form_fields = ['lottery']
@@ -38,6 +42,7 @@ class Mood(Page):
 
 
 page_sequence = [
+    Instructions,
     Mood,
     Lottery,
     ResultsWaitPage

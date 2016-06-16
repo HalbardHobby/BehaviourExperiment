@@ -8,7 +8,13 @@ from ._builtin import Page, WaitPage
 from .models import Constants
 
 
-class MyPage(Page):
+class Questionnaire(Page):
+    form_model = models.Player
+    form_fields = ['age', 'occupation',
+                    'gender', 'daily_internet',
+                    'monthly_income', 'email', 'results']
+
+class Thanks(Page):
     pass
 
 class ResultsWaitPage(WaitPage):
@@ -16,12 +22,8 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         pass
 
-class Results(Page):
-    pass
-
 
 page_sequence = [
-    MyPage,
-    ResultsWaitPage,
-    Results
+    Questionnaire,
+    Thanks
 ]

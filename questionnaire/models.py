@@ -34,4 +34,23 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    pass
+    
+    age = models.PositiveIntegerField(verbose_name='Age')
+    
+    occupation = models.CharField(verbose_name='Occupation')
+    
+    gender = models.CharField(choices=['Male','Female'],
+                                verbose_name='Gender',
+                                widget=widgets.RadioSelectHorizontal())
+    
+    daily_internet = models.PositiveIntegerField(verbose_name='Average daily hours of internet use')
+    
+    monthly_income = models.CurrencyField(choices=[c(x*500) for x in range(1,10)],
+                                            verbose_name='Monthly income',
+                                            widget=widgets.RealWorldCurrencyInput())
+                                            
+    email = models.EmailField(verbose_name='Email')
+    
+    results = models.CharField(choices=['Yes', 'No'],
+                                verbose_name='Would you like to recieve further information?',
+                                widget=widgets.RadioSelectHorizontal())

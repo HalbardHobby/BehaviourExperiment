@@ -1,0 +1,73 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Instructions
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        Hello,
+    </p>
+
+    <p>
+        Thank you for participating in this experiment!
+        Please read the following instructions carefully as they will explain everything you need to do
+        during the experiment.
+    </p>
+
+    <p>
+        As a participant of this experiment, you have been given an initial income of 10 Euros, which
+        can be seen at the top right corner. This amount will be part of your total earnings throughout the
+        experiment and might change during the course of it.
+    </p>
+
+    <p>
+        In this experiment, your additional earnings only depend on your own decisions.
+        You will be asked to make a decision between two different options in several rounds. In each
+        round you will have to choose between “Lottery A” or “Lottery B”. For each lottery, you can
+        earn two different sums of money, depending on the associated probabilities.
+    </p>
+
+    <p>
+        Consider for example the following lotteries:
+    </p>
+
+    <h4>Lottery A</h4> 
+
+    <b>1/10 of $2.00, 9/10 of $1.60</b> 
+
+    <h4>Lottery B</h4>
+
+    <b>1/10 of $3.85, 9/10 of $0.10</b>
+
+    <p>
+        Choosing Lottery A pays 2 Euros with probability 1/10 (1 out of 10 times, or 10%) and 1.60
+        Euros with probability 9/10 (9 out of 10 times or 90%). Choosing Lottery B pays 3.85 Euros
+        with probability 1/10 (1 out of 10 times, or 10%) and 0.10 Euros with probability 9/10 (9 out of
+        10 times or 90%).
+    </p>
+
+    <p>
+        Once you have made the choice of Lottery A or Lottery B, you will immediately be asked to
+        make a similar choice with different lotteries. At the end of all the rounds, one of these rounds
+        will be randomly chosen and the result of your chosen lottery in this round will be added to your
+        total earnings. As you don&#39;t know in advance which decision row will be ultimately used, please
+        think about each one carefully.
+    </p>
+
+    <p>
+        In addition to these choices, you will be asked to fill questionnaires about your current emotional
+        status throughout the experiment and a small survey at the end of it. All your answers are
+        completely anonymous and will only be used for the purposes of this study.
+    </p>
+
+    <p>
+        After completing this experiment, there is a 10% chance that you will earn your total
+        earnings (in Euros). If you are selected, you will be contacted via e-mail to receive your
+        payment through Paypal (your e-mail information will only be used for this purpose).
+    </p>
+    {% next_button %}
+    
+{% endblock %}

@@ -115,6 +115,12 @@ SESSION_CONFIGS = [
         'display_name': 'Behaviour Experiment',
         'num_demo_participants': 1,
         'app_sequence': ['behaviour_experiment', 'questionnaire'],
+    },
+    {
+        'name': 'questionnaire',
+        'display_name': 'test',
+        'num_demo_participants': 1,
+        'app_sequence': ['questionnaire'],
     }
 ]
 
