@@ -17,21 +17,14 @@ class Lottery(Page):
     
     def is_displayed(self):
         return self.subsession.round_number != Constants.num_rounds
+        
+    def before_next_page(self):
+        if self.subsession.round_number == Constants.num_rounds -1:
+            self.subsession.set_payment()
 
 class Income(Page):
     def is_displayed(self):
         return self.subsession.round_number == 10 
-
-class ResultsWaitPage(WaitPage):
-    
-    def is_displayed(self):
-        return self.subsession.round_number == Constants.num_rounds -1
-
-    def after_all_players_arrive(self):
-        self.subsession.set_payment()
-
-    body_text = "Calculating income"
-
 
 class Mood(Page):
     form_model = models.Player
@@ -47,6 +40,5 @@ page_sequence = [
     Instructions,
     Mood,
     Lottery,
-    ResultsWaitPage,
     Income
 ]
