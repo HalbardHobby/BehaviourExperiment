@@ -12,7 +12,7 @@ class Questionnaire(Page):
     form_model = models.Player
     form_fields = ['age', 'occupation',
                     'gender', 'daily_internet',
-                    'monthly_income', 'email', 'results']
+                    'monthly_income', 'email', 'country']
                     
 class Emotions(Page):
     form_model = models.Player

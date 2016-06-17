@@ -12,6 +12,8 @@ from otree.constants import BaseConstants
 from otree.models import BaseSubsession, BaseGroup, BasePlayer
 # </standard imports>
 
+from django_countries.fields import CountryField
+
 author = 'Your name here'
 
 doc = """
@@ -50,10 +52,9 @@ class Player(BasePlayer):
                                             
     email = models.EmailField(verbose_name='Email (this will only be used to contact the participants chosen to receive their earnings during the experiment)')
     
-    results = models.CharField(choices=['Yes', 'No'],
-                                verbose_name='Would you like to recieve further information?',
-                                widget=widgets.RadioSelectHorizontal())
-                                
+    country = CountryField(verbose_name='What is your country of citizenship?')
+    
+    
     """Metrics"""
     
     positive = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
