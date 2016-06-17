@@ -19,12 +19,12 @@ class Lottery(Page):
         return self.subsession.round_number != Constants.num_rounds
         
     def before_next_page(self):
-        if self.subsession.round_number == Constants.num_rounds -1:
+        if self.subsession.round_number == Constants.num_rounds:
             self.player.set_payoff()
 
 class Income(Page):
     def is_displayed(self):
-        return self.subsession.round_number == 10 or self.subsession.round_number == Constants.num_rounds -1
+        return self.subsession.round_number == 10 or self.subsession.round_number == Constants.num_rounds
 
 class Mood(Page):
     form_model = models.Player
