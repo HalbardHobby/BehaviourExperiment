@@ -69,9 +69,6 @@ class Constants(BaseConstants):
                 {'id': 9, 'Lottery A':(9, 4.02, 3.22), 'Lottery B':(9, 8.75, 0.20)},
                 {'id': 10, 'Lottery A':(10, 5.43, 4.34), 'Lottery B':(10, 10.45, 0.27)}]]
                 
-    for lot in lotteries:
-        random.shuffle(lot)
-                
 
 class Subsession(BaseSubsession):
     
@@ -89,17 +86,22 @@ class Subsession(BaseSubsession):
             else:
                 player.payoff = player.in_round(self.round_number -1).payoff
             
-            current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
-            random.shuffle(current_set)
-            current_lottery = current_set[self.round_number % 10]
-            
-            player.lottery_a_prob = current_lottery['Lottery A'][0]
-            player.lottery_a1 = c(current_lottery['Lottery A'][1])
-            player.lottery_a2 = c(current_lottery['Lottery A'][2])
-            
-            player.lottery_b_prob = current_lottery['Lottery B'][0]
-            player.lottery_b1 = c(current_lottery['Lottery B'][1])
-            player.lottery_b2 = c(current_lottery['Lottery B'][2])
+            if self.round_number == Constants.num_rounds:
+                for x in range(3):
+                    current_set = Constants.lotteries[x]
+                    random.shuffle(current_set)
+                    player_history = player.in_all_rounds()
+                    
+                    for y in range(10):
+                        current_lottery = current_set[y-1]
+                        
+                        player_history[(x*10)+y].lottery_a_prob = current_lottery['Lottery A'][0]
+                        player_history[(x*10)+y].lottery_a1 = c(current_lottery['Lottery A'][1])
+                        player_history[(x*10)+y].lottery_a2 = c(current_lottery['Lottery A'][2])
+                        
+                        player_history[(x*10)+y].lottery_b_prob = current_lottery['Lottery B'][0]
+                        player_history[(x*10)+y].lottery_b1 = c(current_lottery['Lottery B'][1])
+                        player_history[(x*10)+y].lottery_b2 = c(current_lottery['Lottery B'][2])
 
 
 class Group(BaseGroup):
@@ -113,7 +115,7 @@ class Player(BasePlayer):
         history = self.in_all_rounds()
         lottery_history = self.in_all_rounds()
         
-        selected_round = random.randint(1, Constants.num_rounds)
+        selected_round = random.randint(1, Constants.num_rounds-1)
         if history[selected_round].lottery == 'Lottery A':
             lottery_1 = history[selected_round].lottery_a1
             lottery_2 = history[selected_round].lottery_a1

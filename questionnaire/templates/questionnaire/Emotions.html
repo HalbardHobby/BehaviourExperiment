@@ -8,7 +8,7 @@
 {% block content %}
 
     <p>
-        Please answer sthis questions. 1 if you disagree and 7 if you agree completely.
+        Please indicate to what extent you agree with the following statements, where 1 indicates strongly disagree and 7 indicates strongly agree.
     </p>
     
     {% formfield player.positive %}
@@ -21,7 +21,6 @@
     {% formfield player.control_situation %}
     {% formfield player.negative_situation %}
     {% formfield player.negative_express %}
-    {% formfield player.negative_situation %}
 
     {% next_button %}
 

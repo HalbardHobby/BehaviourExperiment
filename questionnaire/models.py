@@ -48,7 +48,7 @@ class Player(BasePlayer):
     monthly_income = models.CurrencyField(verbose_name='Monthly income',
                                             widget=widgets.RealWorldCurrencyInput())
                                             
-    email = models.EmailField(verbose_name='Email')
+    email = models.EmailField(verbose_name='Email (this will only be used to contact the participants chosen to receive their earnings during the experiment)')
     
     results = models.CharField(choices=['Yes', 'No'],
                                 verbose_name='Would you like to recieve further information?',
@@ -57,7 +57,7 @@ class Player(BasePlayer):
     """Metrics"""
     
     positive = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
-                                            verbose_name='When I want to feel a positive emotion, I change what I\'m thinking about.',
+                                            verbose_name='When I want to feel a more positive emotion (such as joy or amusement), I change what I\'m thinking about.',
                                             widget=widgets.RadioSelectHorizontal())
                                             
     emotions = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
@@ -65,15 +65,15 @@ class Player(BasePlayer):
                                             widget=widgets.RadioSelectHorizontal())
     
     negative = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
-                                            verbose_name='When I want to feel a less negative emotion, I change what I\'m thinking about.',
+                                            verbose_name='When I want to feel a less negative emotion (such as sadness or anger), I change what I\'m thinking about.',
                                             widget=widgets.RadioSelectHorizontal())
                                             
     express = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
-                                            verbose_name='When I\'m feeling a positive emotion, I\'m careful not to express them.',
+                                            verbose_name='When I\'m feeling positive emotions, I\'m careful not to express them.',
                                             widget=widgets.RadioSelectHorizontal())
     
     stress = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
-                                            verbose_name='When I\'m faced with an stressful situation, I think about it in a way that makes me feel calm.',
+                                            verbose_name='When I\'m faced with an stressful situation, I make myself think about it in a way that helps me stay calm.',
                                             widget=widgets.RadioSelectHorizontal())
                                             
     control = models.PositiveIntegerField(choices=[1,2,3,4,5,6,7], blank=False,
