@@ -75,57 +75,31 @@ class Constants(BaseConstants):
 
 class Subsession(BaseSubsession):
     
-    lottery_a1 = models.CurrencyField()
-    lottery_a2 = models.CurrencyField()
-    
-    lottery_a_prob = models.IntegerField()
-    
-    lottery_b1 = models.CurrencyField()
-    lottery_b2 = models.CurrencyField()
-                                
-    lottery_b_prob = models.IntegerField()
-    
-    def set_payment(self):
-        player_history = self.get_groups()[0].get_players()[0].in_all_rounds()
-        lottery_history = self.in_all_rounds()
-        
-        selected_round = random.randint(1, Constants.num_rounds)
-        if player_history[selected_round].lottery == 'Lottery A':
-            lottery_1 = lottery_history[selected_round].lottery_a1
-            lottery_2 = lottery_history[selected_round].lottery_a1
-            lottery_p = lottery_history[selected_round].lottery_a_prob
-        elif player_history[selected_round].lottery == 'Lottery B':
-            lottery_1 = lottery_history[selected_round].lottery_b1
-            lottery_2 = lottery_history[selected_round].lottery_b1
-            lottery_p = lottery_history[selected_round].lottery_b_prob
-            
-        result = random.randint(1,10)
-        player = self.get_groups()[0].get_players()[0]
-        player.payoff = c(10)
-        player.payoff += c(lottery_1) if result <= lottery_p else c(lottery_2)
-    
     def before_session_starts(self):
-        current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
-        current_lottery = current_set[self.round_number % 10]
         
-        player = self.get_groups()[0].get_players()[0]
+        players = self.get_players()
         
-        if self.round_number == 1:
-            player.payoff = random.choice([c(5),c(10),c(15)])
-        elif self.round_number == 11:
-            player.payoff = c(10)
-        elif self.round_number == Constants.num_rounds:
-            player.payoff = None
-        else:
-            player.payoff = player.in_round(self.round_number -1).payoff
-        
-        self.lottery_a_prob = current_lottery['Lottery A'][0]
-        self.lottery_a1 = c(current_lottery['Lottery A'][1])
-        self.lottery_a2 = c(current_lottery['Lottery A'][2])
-        
-        self.lottery_b_prob = current_lottery['Lottery B'][0]
-        self.lottery_b1 = c(current_lottery['Lottery B'][1])
-        self.lottery_b2 = c(current_lottery['Lottery B'][2])
+        for player in players:
+            if self.round_number == 1:
+                player.payoff = random.choice([c(5),c(10),c(15)])
+            elif self.round_number == 11:
+                player.payoff = c(10)
+            elif self.round_number == Constants.num_rounds:
+                player.payoff = None
+            else:
+                player.payoff = player.in_round(self.round_number -1).payoff
+            
+            current_set = Constants.lotteries[self.round_number//10] if self.round_number < 40 else Constants.lotteries[3]
+            random.shuffle(current_set)
+            current_lottery = current_set[self.round_number % 10]
+            
+            player.lottery_a_prob = current_lottery['Lottery A'][0]
+            player.lottery_a1 = c(current_lottery['Lottery A'][1])
+            player.lottery_a2 = c(current_lottery['Lottery A'][2])
+            
+            player.lottery_b_prob = current_lottery['Lottery B'][0]
+            player.lottery_b1 = c(current_lottery['Lottery B'][1])
+            player.lottery_b2 = c(current_lottery['Lottery B'][2])
 
 
 class Group(BaseGroup):
@@ -136,12 +110,37 @@ class Player(BasePlayer):
 
     def set_payoff(self):
         """Calculate payoff, which is zero for the survey"""
-        self.payoff = 0
+        history = self.in_all_rounds()
+        lottery_history = self.in_all_rounds()
+        
+        selected_round = random.randint(1, Constants.num_rounds)
+        if history[selected_round].lottery == 'Lottery A':
+            lottery_1 = history[selected_round].lottery_a1
+            lottery_2 = history[selected_round].lottery_a1
+            lottery_p = history[selected_round].lottery_a_prob
+        elif history[selected_round].lottery == 'Lottery B':
+            lottery_1 = history[selected_round].lottery_b1
+            lottery_2 = history[selected_round].lottery_b1
+            lottery_p = history[selected_round].lottery_b_prob
+            
+        result = random.randint(1,10)
+        self.payoff = c(10)
+        self.payoff += c(lottery_1) if result <= lottery_p else c(lottery_2)
         
     lottery = models.CharField(choices=['Lottery A', 'Lottery B'],
                                 doc="""Lottery A or B""",
                                 verbose_name='Choose which lottery you prefer',
                                 widget=widgets.RadioSelectHorizontal())
+    
+    lottery_a1 = models.CurrencyField()
+    lottery_a2 = models.CurrencyField()
+    
+    lottery_a_prob = models.IntegerField()
+    
+    lottery_b1 = models.CurrencyField()
+    lottery_b2 = models.CurrencyField()
+                                
+    lottery_b_prob = models.IntegerField()
     
     """preguntas de control"""
     

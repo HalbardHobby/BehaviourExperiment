@@ -7,16 +7,23 @@
 
 {% block content %}
 
-    <h3>
-        {% if player.payoff == 5 %}
-            Your income has increased! 
-        {% elif player.payoff == 15 %}
-            Your income has decreased! 
-        {% else %}
-            Your income is 10! 
-        {%endif%}
-        You’re guaranteed to have a minimal earning of 10 Euros at the end of the experiment.
-    </h3>
+    {% if subsession.round_number == 10 %}    
+        <h3>
+            {% if player.payoff == 5 %}
+                Your income has increased! 
+            {% elif player.payoff == 15 %}
+                Your income has decreased! 
+            {% else %}
+                Your income is 10! 
+            {%endif%}
+            You’re guaranteed to have a minimal earning of €10 at the end of the experiment.
+        </h3>
+    {% else %}    
+        <h3>
+            Congratulations, your final income is {{player.payoff}}. To recieve further information check the corresponding checkbox.
+        </h3>
+    {% endif %}
+    
     {% next_button %}
 
 {% endblock %}
