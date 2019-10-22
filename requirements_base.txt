@@ -1,7 +1,7 @@
 Babel==2.3.4
 Django==1.8.8
 IPy==0.83
-Pillow==2.3.0
+Pillow==6.2.0
 Twisted==16.1.1
 amqp==1.4.9
 anyjson==0.3.3
