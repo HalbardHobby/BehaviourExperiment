@@ -56,7 +56,7 @@ six==1.10.0
 tornado==3.1.1
 txaio==2.5.1
 unicodecsv==0.14.1
-urllib3==1.7.1
+urllib3==1.26.5
 wheel==0.29.0
 whitenoise==3.0
 xmltodict==0.10.1
