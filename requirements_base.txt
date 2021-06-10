@@ -1,5 +1,5 @@
 Babel==2.3.4
-Django==1.8.8
+Django==2.2.24
 IPy==0.83
 Pillow==2.3.0
 Twisted==16.1.1
